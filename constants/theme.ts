@@ -4,6 +4,7 @@ export const allColors = {
   primary: "#008037",
   primaryLight: "#0ea5e9",
   primaryDark: "#0369a1",
+  primaryLightTint: "#E6F5EB",
   text: "#fff",
   textLight: "#e5e5e5",
   textLighter: "#d4d4d4",
