@@ -1,15 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
 import { useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootState } from '@/app/redux-code/store';
-import Button from '@/components/Button';
 import { allColors, spacingX, spacingY } from '@/constants/theme';
-import { scaleFont, verticalScale } from '@/utils/styling';
+import { scaleFont } from '@/utils/styling';
 
 const Home: React.FC = () => {
-  const router = useRouter();
   const { user } = useSelector((state: RootState) => state.userState);
 
   return (
@@ -20,7 +17,7 @@ const Home: React.FC = () => {
           {user?.name || 'User'}
         </Text>
         <Text style={styles.description}>
-          You're successfully logged in to the app.
+          {"You're successfully logged in to the app."}
         </Text>
       </View>
     </SafeAreaView>

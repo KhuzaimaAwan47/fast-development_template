@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootState } from '@/app/redux-code/store';
-import Button from '@/components/Button';
 import { allColors, spacingX, spacingY, radius } from '@/constants/theme';
 import { scaleFont, verticalScale } from '@/utils/styling';
 

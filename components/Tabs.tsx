@@ -1,11 +1,10 @@
 import { allColors } from '@/constants/theme';
+import { CustomTabsProps } from '@/types/CustomTabsTypes';
 import { scaleFont } from '@/utils/styling';
 import { Tabs as ExpoTabs } from 'expo-router';
 import React from 'react';
 
-interface CustomTabsProps {
-  children?: React.ReactNode;
-}
+
 
 const Tabs: React.FC<CustomTabsProps> = ({ children }) => {
   return (

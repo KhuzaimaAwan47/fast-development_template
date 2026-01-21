@@ -1,15 +1,9 @@
 import { allColors, radius, spacingX, spacingY } from '@/constants/theme';
+import { InputFieldProps } from '@/types/InputFeildTypes';
 import { scaleFont, verticalScale } from '@/utils/styling';
-import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TextInputProps, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
-interface InputFieldProps extends TextInputProps {
-  label?: string;
-  error?: string;
-  containerStyle?: object;
-  leftIcon?: React.ReactNode;
-}
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const InputField: React.FC<InputFieldProps> = ({
   label,

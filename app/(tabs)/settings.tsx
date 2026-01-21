@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { logout } from '@/app/redux-code/action';
 import Button from '@/components/Button';
 import { allColors, spacingX, spacingY, radius } from '@/constants/theme';
-import { scaleFont, verticalScale } from '@/utils/styling';
+import { scaleFont } from '@/utils/styling';
 
 const Settings: React.FC = () => {
   const router = useRouter();

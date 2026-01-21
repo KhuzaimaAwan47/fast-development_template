@@ -1,37 +1,18 @@
 import { allColors, radius, spacingX } from '@/constants/theme';
+import { ButtonProps, getButtonPropsWithDefaults, getButtonStyle } from '@/types/ButtonTypes';
 import { scaleFont, verticalScale } from '@/utils/styling';
 import React from 'react';
-import { ActivityIndicator, StyleSheet, Text, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
-
-interface ButtonProps {
-  title: string;
-  onPress: () => void;
-  loading?: boolean;
-  disabled?: boolean;
-  variant?: 'primary' | 'secondary' | 'outline';
-  containerStyle?: ViewStyle;
-  textStyle?: TextStyle;
-}
-
-const Button: React.FC<ButtonProps> = ({
-  title,
-  onPress,
-  loading = false,
-  disabled = false,
-  variant = 'primary',
-  containerStyle,
-  textStyle,
-}) => {
-  const getButtonStyle = () => {
-    switch (variant) {
-      case 'secondary':
-        return styles.secondaryButton;
-      case 'outline':
-        return styles.outlineButton;
-      default:
-        return styles.primaryButton;
-    }
-  };
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
+const Button: React.FC<ButtonProps> = (props) => {
+  const {
+    title,
+    onPress,
+    loading,
+    disabled,
+    variant,
+    containerStyle,
+    textStyle,
+  } = getButtonPropsWithDefaults(props);
 
   const getTextStyle = () => {
     switch (variant) {
@@ -48,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
     <TouchableOpacity
       style={[
         styles.button,
-        getButtonStyle(),
+        getButtonStyle(variant, styles),
         (disabled || loading) && styles.buttonDisabled,
         containerStyle,
       ]}

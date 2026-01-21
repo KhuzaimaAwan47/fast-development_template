@@ -1,13 +1,8 @@
 import { allColors, radius, spacingX, spacingY } from '@/constants/theme';
+import { OTPInputProps } from '@/types/OTPInputTypes';
 import { scaleFont, verticalScale } from '@/utils/styling';
 import React, { useRef, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-
-interface OTPInputProps {
-  length?: number;
-  onComplete: (otp: string) => void;
-  error?: string;
-}
 
 const OTPInput: React.FC<OTPInputProps> = ({
   length = 6,
@@ -28,11 +23,11 @@ const OTPInput: React.FC<OTPInputProps> = ({
         }
       });
       setOtp(newOtp);
-      
+
       // Focus on last filled input or next empty
       const nextIndex = Math.min(index + pastedText.length, length - 1);
       inputRefs.current[nextIndex]?.focus();
-      
+
       if (newOtp.every((digit) => digit !== '')) {
         onComplete(newOtp.join(''));
       }
@@ -66,7 +61,9 @@ const OTPInput: React.FC<OTPInputProps> = ({
         {otp.map((digit, index) => (
           <TextInput
             key={index}
-            ref={(ref) => (inputRefs.current[index] = ref)}
+            ref={(ref) => {
+              inputRefs.current[index] = ref;
+            }}
             style={[
               styles.input,
               digit && styles.inputFilled,
