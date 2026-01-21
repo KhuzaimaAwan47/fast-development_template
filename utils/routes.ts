@@ -9,7 +9,12 @@ export const ROUTES = {
   TABS: {
     HOME: '/(tabs)',
     PROFILE: '/(tabs)/profile',
-    SETTINGS: '/(tabs)/settings',
+    ORDERS: '/(tabs)/orders',
+    WALLETS: '/(tabs)/wallets',
+  },
+  // Screen routes
+  SCREENS: {
+    SETTINGS: '/(screens)/settings',
   },
   // Root
   ROOT: '/',

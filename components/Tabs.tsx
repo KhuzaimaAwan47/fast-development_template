@@ -1,4 +1,4 @@
-import { allColors } from '@/constants/theme';
+import { allColors, radius } from '@/constants/theme';
 import { CustomTabsProps } from '@/types/CustomTabsTypes';
 import { scaleFont } from '@/utils/styling';
 import { Tabs as ExpoTabs } from 'expo-router';
@@ -16,6 +16,8 @@ const Tabs: React.FC<CustomTabsProps> = ({ children }) => {
           backgroundColor: allColors.white,
           borderTopWidth: 1,
           borderTopColor: allColors.neutral200,
+          borderTopLeftRadius: radius._20,
+          borderTopRightRadius: radius._20,
           height: 60,
           paddingBottom: 8,
           paddingTop: 8,

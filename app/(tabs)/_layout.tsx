@@ -1,6 +1,6 @@
-import { allColors } from '@/constants/theme';
+import { allColors, radius } from '@/constants/theme';
 import { scaleFont } from '@/utils/styling';
-import { Ionicons } from '@expo/vector-icons';
+import { House, HouseSimple, ShoppingBag, ShoppingCart, Wallet, User, UserCircle } from 'phosphor-react-native';
 import { Tabs } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -16,6 +16,8 @@ export default function TabsLayout() {
           backgroundColor: allColors.white,
           borderTopWidth: 1,
           borderTopColor: allColors.neutral200,
+          borderTopLeftRadius: radius._20,
+          borderTopRightRadius: radius._20,
           height: 60 + insets.bottom,
           paddingBottom: insets.bottom + 8,
           paddingTop: 8,
@@ -31,29 +33,63 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size, focused }) => {
+            const Icon = focused ? House : HouseSimple;
+            return (
+              <Icon 
+                size={size} 
+                color={focused ? color : allColors.neutral400} 
+                weight={focused ? "fill" : "regular"}
+              />
+            );
+          },
         }}
       />
-     
       <Tabs.Screen
-        name="settings"
+        name="orders"
         options={{
-          title: 'Settings',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings" size={size} color={color} />
-          ),
+          title: 'Orders',
+          tabBarIcon: ({ color, size, focused }) => {
+            const Icon = focused ? ShoppingBag : ShoppingCart;
+            return (
+              <Icon 
+                size={size} 
+                color={focused ? color : allColors.neutral400} 
+                weight={focused ? "fill" : "regular"}
+              />
+            );
+          },
         }}
       />
-      
-       <Tabs.Screen
+      <Tabs.Screen
+        name="wallets"
+        options={{
+          title: 'Wallets',
+          tabBarIcon: ({ color, size, focused }) => {
+            return (
+              <Wallet 
+                size={size} 
+                color={focused ? color : allColors.neutral400} 
+                weight={focused ? "fill" : "regular"}
+              />
+            );
+          },
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size, focused }) => {
+            const Icon = focused ? User : UserCircle;
+            return (
+              <Icon 
+                size={size} 
+                color={focused ? color : allColors.neutral400} 
+                weight={focused ? "fill" : "regular"}
+              />
+            );
+          },
         }}
       />
     </Tabs>

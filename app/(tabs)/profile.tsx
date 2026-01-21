@@ -1,13 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 import { RootState } from '@/app/redux-code/store';
 import { allColors, spacingX, spacingY, radius } from '@/constants/theme';
 import { scaleFont, verticalScale } from '@/utils/styling';
 
 const Profile: React.FC = () => {
   const { user } = useSelector((state: RootState) => state.userState);
+  const router = useRouter();
+
+  const handleSettingsPress = () => {
+    router.push('/(screens)/settings');
+  };
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -38,6 +45,21 @@ const Profile: React.FC = () => {
             {user?.isVerified ? 'Verified' : 'Not Verified'}
           </Text>
         </View>
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Actions</Text>
+        <TouchableOpacity 
+          style={styles.actionCard}
+          onPress={handleSettingsPress}
+          activeOpacity={0.7}
+        >
+          <View style={styles.actionContent}>
+            <Ionicons name="settings-outline" size={24} color={allColors.primary} />
+            <Text style={styles.actionLabel}>Settings</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={20} color={allColors.neutral500} />
+        </TouchableOpacity>
       </View>
       </ScrollView>
     </SafeAreaView>
@@ -107,6 +129,25 @@ const styles = StyleSheet.create({
   },
   statusVerified: {
     color: allColors.green,
+  },
+  actionCard: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: allColors.neutral50,
+    padding: spacingX._15,
+    borderRadius: radius._10,
+    marginBottom: spacingY._10,
+  },
+  actionContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacingX._12,
+  },
+  actionLabel: {
+    fontSize: scaleFont(16),
+    fontWeight: '500',
+    color: allColors.black,
   },
 });
 
