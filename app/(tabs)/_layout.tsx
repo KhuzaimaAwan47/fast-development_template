@@ -1,7 +1,7 @@
 import { allColors, radius } from '@/constants/theme';
 import { scaleFont } from '@/utils/styling';
-import { House, HouseSimple, ShoppingBag, ShoppingCart, Wallet, User, UserCircle } from 'phosphor-react-native';
 import { Tabs } from 'expo-router';
+import { HouseIcon, HouseSimpleIcon, ShoppingBagIcon, ShoppingCartIcon, UserCircleIcon, UserIcon, WalletIcon } from 'phosphor-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function TabsLayout() {
@@ -11,11 +11,9 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: allColors.primary,
-        tabBarInactiveTintColor: allColors.neutral500,
+        tabBarInactiveTintColor: allColors.neutral400,
         tabBarStyle: {
           backgroundColor: allColors.white,
-          borderTopWidth: 1,
-          borderTopColor: allColors.neutral200,
           borderTopLeftRadius: radius._20,
           borderTopRightRadius: radius._20,
           height: 60 + insets.bottom,
@@ -34,11 +32,11 @@ export default function TabsLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color, size, focused }) => {
-            const Icon = focused ? House : HouseSimple;
+            const Icon = focused ? HouseIcon : HouseSimpleIcon;
             return (
-              <Icon 
-                size={size} 
-                color={focused ? color : allColors.neutral400} 
+              <Icon
+                size={size}
+                color={focused ? color : allColors.neutral400}
                 weight={focused ? "fill" : "regular"}
               />
             );
@@ -50,11 +48,11 @@ export default function TabsLayout() {
         options={{
           title: 'Orders',
           tabBarIcon: ({ color, size, focused }) => {
-            const Icon = focused ? ShoppingBag : ShoppingCart;
+            const Icon = focused ? ShoppingBagIcon : ShoppingCartIcon;
             return (
-              <Icon 
-                size={size} 
-                color={focused ? color : allColors.neutral400} 
+              <Icon
+                size={size}
+                color={focused ? color : allColors.neutral400}
                 weight={focused ? "fill" : "regular"}
               />
             );
@@ -67,9 +65,9 @@ export default function TabsLayout() {
           title: 'Wallets',
           tabBarIcon: ({ color, size, focused }) => {
             return (
-              <Wallet 
-                size={size} 
-                color={focused ? color : allColors.neutral400} 
+              <WalletIcon
+                size={size}
+                color={focused ? color : allColors.neutral400}
                 weight={focused ? "fill" : "regular"}
               />
             );
@@ -81,11 +79,11 @@ export default function TabsLayout() {
         options={{
           title: 'Profile',
           tabBarIcon: ({ color, size, focused }) => {
-            const Icon = focused ? User : UserCircle;
+            const Icon = focused ? UserIcon : UserCircleIcon;
             return (
-              <Icon 
-                size={size} 
-                color={focused ? color : allColors.neutral400} 
+              <Icon
+                size={size}
+                color={focused ? color : allColors.neutral400}
                 weight={focused ? "fill" : "regular"}
               />
             );

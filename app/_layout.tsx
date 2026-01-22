@@ -5,6 +5,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { store, persistor } from "./redux-code/store";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
 import { allColors } from "@/constants/theme";
+import { StatusBar } from "expo-status-bar";
 
 function LoadingScreen() {
   return (
@@ -17,6 +18,7 @@ function LoadingScreen() {
 export default function RootLayout() {
   return (
     <SafeAreaProvider>
+      <StatusBar style="dark" />
       <Provider store={store}>
         <PersistGate loading={<LoadingScreen />} persistor={persistor}>
           <Stack screenOptions={{ headerShown: false, }} />

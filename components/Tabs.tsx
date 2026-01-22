@@ -14,13 +14,12 @@ const Tabs: React.FC<CustomTabsProps> = ({ children }) => {
         tabBarInactiveTintColor: allColors.neutral500,
         tabBarStyle: {
           backgroundColor: allColors.white,
-          borderTopWidth: 1,
-          borderTopColor: allColors.neutral200,
           borderTopLeftRadius: radius._20,
           borderTopRightRadius: radius._20,
-          height: 60,
+          height: "60%",
           paddingBottom: 8,
           paddingTop: 8,
+          elevation: 0,
         },
         tabBarLabelStyle: {
           fontSize: scaleFont(12),

@@ -1,17 +1,23 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { allColors, spacingX, spacingY, radius } from '@/constants/theme';
+import { allColors, radius, spacingX, spacingY } from '@/constants/theme';
 import { scaleFont } from '@/utils/styling';
+import React from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
+import TitleToolbar from '@/components/TitleToolbar';
 
 const Settings: React.FC = () => {
+  const router = useRouter();
+
+  const handleBackPress = () => {
+    router.back();
+  };
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
+      <TitleToolbar title="Settings" onBackPress={handleBackPress} />
       <ScrollView contentContainerStyle={styles.content}>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Settings</Text>
-        
         <View style={styles.settingItem}>
           <Text style={styles.settingLabel}>Notifications</Text>
           <Text style={styles.settingValue}>Enabled</Text>
