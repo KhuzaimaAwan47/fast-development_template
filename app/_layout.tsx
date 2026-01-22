@@ -19,11 +19,7 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <Provider store={store}>
         <PersistGate loading={<LoadingScreen />} persistor={persistor}>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-            }}
-          />
+          <Stack screenOptions={{ headerShown: false, }} />
         </PersistGate>
       </Provider>
     </SafeAreaProvider>

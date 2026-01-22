@@ -1,19 +1,28 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { RootState } from '@/app/redux-code/store';
+import { logout } from '@/app/redux-code/action';
+import Button from '@/components/Button';
+import DebouncedTouchableOpacity from '@/components/DebouncedTouchableOpacity';
 import { allColors, spacingX, spacingY, radius } from '@/constants/theme';
 import { scaleFont, verticalScale } from '@/utils/styling';
 
 const Profile: React.FC = () => {
   const { user } = useSelector((state: RootState) => state.userState);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleSettingsPress = () => {
     router.push('/(screens)/settings');
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.replace('/(auth)/sign-in');
   };
 
   return (
@@ -49,7 +58,7 @@ const Profile: React.FC = () => {
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Actions</Text>
-        <TouchableOpacity 
+        <DebouncedTouchableOpacity 
           style={styles.actionCard}
           onPress={handleSettingsPress}
           activeOpacity={0.7}
@@ -59,7 +68,14 @@ const Profile: React.FC = () => {
             <Text style={styles.actionLabel}>Settings</Text>
           </View>
           <Ionicons name="chevron-forward" size={20} color={allColors.neutral500} />
-        </TouchableOpacity>
+        </DebouncedTouchableOpacity>
+
+        <Button
+          title="Logout"
+          onPress={handleLogout}
+          variant="outline"
+          containerStyle={styles.logoutButton}
+        />
       </View>
       </ScrollView>
     </SafeAreaView>
@@ -148,6 +164,10 @@ const styles = StyleSheet.create({
     fontSize: scaleFont(16),
     fontWeight: '500',
     color: allColors.black,
+  },
+  logoutButton: {
+    marginTop: spacingY._20,
+    marginBottom: spacingY._40,
   },
 });
 

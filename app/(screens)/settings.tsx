@@ -1,21 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { useRouter } from 'expo-router';
-import { useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { logout } from '@/app/redux-code/action';
-import Button from '@/components/Button';
 import { allColors, spacingX, spacingY, radius } from '@/constants/theme';
 import { scaleFont } from '@/utils/styling';
 
 const Settings: React.FC = () => {
-  const router = useRouter();
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logout());
-    router.replace('/(auth)/sign-in');
-  };
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -54,13 +43,6 @@ const Settings: React.FC = () => {
           <Text style={styles.settingLabel}>About</Text>
         </View>
       </View>
-
-      <Button
-        title="Logout"
-        onPress={handleLogout}
-        variant="outline"
-        containerStyle={styles.logoutButton}
-      />
       </ScrollView>
     </SafeAreaView>
   );
@@ -99,10 +81,6 @@ const styles = StyleSheet.create({
   settingValue: {
     fontSize: scaleFont(16),
     color: allColors.neutral600,
-  },
-  logoutButton: {
-    marginTop: spacingY._20,
-    marginBottom: spacingY._40,
   },
 });
 
