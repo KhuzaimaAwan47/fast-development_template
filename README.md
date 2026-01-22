@@ -1,6 +1,18 @@
-# Welcome to your Expo app 👋
+# Fast Development Template 🚀
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a fast development template to start a React Native project. Built with [Expo](https://expo.dev) and designed to get you up and running quickly with a modern, well-structured React Native application.
+
+## About This Template
+
+This template provides a solid foundation for React Native development with:
+- **Expo Router** for file-based routing
+- **Redux Toolkit** for state management
+- **React Navigation** for navigation
+- Pre-configured components and utilities
+- TypeScript support
+- Modern React Native best practices
+
+Perfect for developers who want to skip the initial setup and jump straight into building their app.
 
 ## Get started
 
