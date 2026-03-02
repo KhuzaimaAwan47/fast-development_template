@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux-code/store';
@@ -8,6 +9,7 @@ import InputField from '@/components/InputField';
 import Button from '@/components/Button';
 import { allColors, spacingX, spacingY } from '@/constants/theme';
 import { scaleFont, verticalScale } from '@/utils/styling';
+import { ROUTES } from '@/utils/routes';
 
 const SignUp: React.FC = () => {
   const router = useRouter();
@@ -71,107 +73,116 @@ const SignUp: React.FC = () => {
       dispatch(setLoginLoading(false));
       // Navigate to OTP verification with email
       router.push({
-        pathname: '/(auth)/otp-verification',
+        pathname: ROUTES.AUTH.OTP_VERIFICATION,
         params: { email: formData.email },
       });
     }, 1500);
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
+    <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
+      <KeyboardAvoidingView
+        style={styles.keyboardView}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 0}
       >
-        <View style={styles.content}>
-          <Text style={styles.title}>Create Account</Text>
-          <Text style={styles.subtitle}>Sign up to get started</Text>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'none'}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.content}>
+            <Text style={styles.title}>Create Account</Text>
+            <Text style={styles.subtitle}>Sign up to get started</Text>
 
-          <View style={styles.form}>
-            <InputField
-              label="Full Name"
-              placeholder="Enter your full name"
-              value={formData.name}
-              onChangeText={(text) => {
-                setFormData({ ...formData, name: text });
-                setErrors({ ...errors, name: '' });
-              }}
-              error={errors.name}
-            />
+            <View style={styles.form}>
+              <InputField
+                label="Full Name"
+                placeholder="Enter your full name"
+                value={formData.name}
+                onChangeText={(text) => {
+                  setFormData({ ...formData, name: text });
+                  setErrors({ ...errors, name: '' });
+                }}
+                error={errors.name}
+              />
 
-            <InputField
-              label="Email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChangeText={(text) => {
-                setFormData({ ...formData, email: text });
-                setErrors({ ...errors, email: '' });
-              }}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              error={errors.email}
-            />
+              <InputField
+                label="Email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChangeText={(text) => {
+                  setFormData({ ...formData, email: text });
+                  setErrors({ ...errors, email: '' });
+                }}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                error={errors.email}
+              />
 
-            <InputField
-              label="Password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChangeText={(text) => {
-                setFormData({ ...formData, password: text });
-                setErrors({ ...errors, password: '' });
-              }}
-              secureTextEntry
-              error={errors.password}
-            />
+              <InputField
+                label="Password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChangeText={(text) => {
+                  setFormData({ ...formData, password: text });
+                  setErrors({ ...errors, password: '' });
+                }}
+                secureTextEntry
+                error={errors.password}
+              />
 
-            <InputField
-              label="Confirm Password"
-              placeholder="Confirm your password"
-              value={formData.confirmPassword}
-              onChangeText={(text) => {
-                setFormData({ ...formData, confirmPassword: text });
-                setErrors({ ...errors, confirmPassword: '' });
-              }}
-              secureTextEntry
-              error={errors.confirmPassword}
-            />
+              <InputField
+                label="Confirm Password"
+                placeholder="Confirm your password"
+                value={formData.confirmPassword}
+                onChangeText={(text) => {
+                  setFormData({ ...formData, confirmPassword: text });
+                  setErrors({ ...errors, confirmPassword: '' });
+                }}
+                secureTextEntry
+                error={errors.confirmPassword}
+              />
 
-            <Button
-              title="Sign Up"
-              onPress={handleSignUp}
-              loading={loginLoading}
-              containerStyle={styles.button}
-            />
+              <Button
+                title="Sign Up"
+                onPress={handleSignUp}
+                loading={loginLoading}
+                containerStyle={styles.button}
+              />
 
-            <View style={styles.footer}>
-              <Text style={styles.footerText}>Already have an account? </Text>
-              <Text
-                style={styles.linkText}
-                onPress={() => router.back()}
-              >
-                Sign In
-              </Text>
+              <View style={styles.footer}>
+                <Text style={styles.footerText}>Already have an account? </Text>
+                <Text
+                  style={styles.linkText}
+                  onPress={() => router.back()}
+                >
+                  Sign In
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
+    flex: 1,
+    backgroundColor: allColors.white,
+  },
+  keyboardView: {
     flex: 1,
     backgroundColor: allColors.white,
   },
   scrollContent: {
     flexGrow: 1,
+    backgroundColor: allColors.white,
   },
   content: {
-    flex: 1,
     paddingHorizontal: spacingX._20,
     paddingTop: verticalScale(80),
     paddingBottom: spacingY._40,
@@ -187,9 +198,7 @@ const styles = StyleSheet.create({
     color: allColors.neutral600,
     marginBottom: spacingY._40,
   },
-  form: {
-    flex: 1,
-  },
+  form: {},
   button: {
     marginTop: spacingY._10,
   },

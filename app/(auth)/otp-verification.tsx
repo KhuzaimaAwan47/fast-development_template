@@ -3,6 +3,7 @@ import { RootState } from '@/app/redux-code/store';
 import Button from '@/components/Button';
 import OTPInput from '@/components/OTPInput';
 import { allColors, spacingX, spacingY } from '@/constants/theme';
+import { ROUTES } from '@/utils/routes';
 import { scaleFont, verticalScale } from '@/utils/styling';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useState } from 'react';
@@ -45,7 +46,7 @@ const OTPVerification: React.FC = () => {
         dispatch(verifyOTP(true));
         dispatch(login(mockUser, mockToken));
         dispatch(setOTPLoading(false));
-        router.replace('/(tabs)');
+        router.replace(ROUTES.TABS.HOME);
       } else {
         setError('Invalid OTP code. Please try again.');
         dispatch(setOTPLoading(false));
